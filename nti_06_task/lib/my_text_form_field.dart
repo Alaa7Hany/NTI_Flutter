@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nti_06_task/utils/app_assets.dart';
 
 class MyTextFormField extends StatelessWidget {
   const MyTextFormField({
@@ -7,14 +9,19 @@ class MyTextFormField extends StatelessWidget {
     this.isPassword = false,
     required this.hint,
     required this.controller,
-    this.onShowPasswordFunction,
-  }) : showPass = isPassword;
+    this.onChangeVisibality,
+    this.visibality,
+    this.passController,
+    this.isConfirmPass = false,
+  });
   final TextInputType keyboardType;
   final bool isPassword;
   final String hint;
   final TextEditingController controller;
-  final void Function()? onShowPasswordFunction;
-  final bool showPass;
+  final TextEditingController? passController;
+  final void Function()? onChangeVisibality;
+  final bool Function()? visibality;
+  final bool isConfirmPass;
 
   String? validateUsername(String? value) {
     final usernameRegEx = RegExp(r'^[a-zA-Z0-9_]{3,16}$');
@@ -36,26 +43,41 @@ class MyTextFormField extends StatelessWidget {
     return null;
   }
 
+  String? validateConfirmPass(String? value) {
+    print('Confirm: $value, Original: ${passController?.text}');
+    if (value == null || value.isEmpty) {
+      return 'Password is required';
+    } else if (passController == null || passController!.text != value) {
+      return 'Password not matched';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: isPassword ? validatePassword : validateUsername,
+      validator:
+          isPassword
+              ? (isConfirmPass ? validateConfirmPass : validatePassword)
+              : validateUsername,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      obscureText: showPass,
+      obscureText: visibality != null ? visibality!() : false,
       keyboardType: keyboardType,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: TextStyle(color: Colors.grey),
         prefixIcon:
             !isPassword
-                ? Icon(Icons.person_2_outlined)
+                ? SvgPicture.asset(AppAssets.profile)
                 : Icon(Icons.key_outlined),
         suffixIcon:
             isPassword
                 ? IconButton(
-                  onPressed: () {},
+                  onPressed: onChangeVisibality,
                   icon: Icon(
-                    showPass ? Icons.lock_outlined : Icons.lock_open_outlined,
+                    (visibality != null ? visibality!() : false)
+                        ? Icons.lock_outlined
+                        : Icons.lock_open_outlined,
                   ),
                 )
                 : null,

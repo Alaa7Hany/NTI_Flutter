@@ -9,9 +9,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPassController = TextEditingController();
+  int? selectedGender = 0;
+  bool rememberMe = false;
+  bool showPass = true;
+
+  bool visibality() {
+    return showPass;
+  }
+
+  void onChangeVisibality() {
+    setState(() {
+      showPass = !showPass;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,16 +49,81 @@ class _MyHomePageState extends State<MyHomePage> {
                       keyboardType: TextInputType.visiblePassword,
                       isPassword: true,
                       hint: 'Password',
+                      onChangeVisibality: onChangeVisibality,
+                      visibality: visibality,
                       controller: passwordController,
                     ),
                     SizedBox(height: 15),
                     MyTextFormField(
                       keyboardType: TextInputType.visiblePassword,
                       isPassword: true,
+                      passController: passwordController,
+                      isConfirmPass: true,
                       hint: 'Confirm Password',
+                      onChangeVisibality: onChangeVisibality,
+                      visibality: visibality,
                       controller: confirmPassController,
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: 15),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 140,
+
+                          child: DropdownButtonFormField(
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: BorderSide(
+                                  color: Colors.grey.shade300,
+                                  width: 2,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: BorderSide(
+                                  color: Colors.grey.shade300,
+                                  width: 2,
+                                ),
+                              ),
+
+                              fillColor: Colors.white,
+                              filled: true,
+                            ),
+                            dropdownColor: Colors.white,
+                            value: selectedGender,
+                            items: [
+                              DropdownMenuItem(value: 0, child: Text('Male')),
+                              DropdownMenuItem(value: 1, child: Text('Female')),
+                            ],
+                            onChanged: (value) {
+                              setState(() {
+                                selectedGender = value;
+                              });
+                            },
+                          ),
+                        ),
+                        Spacer(),
+                        Text('Remember me?'),
+                        Checkbox(
+                          value: rememberMe,
+                          onChanged: (value) {
+                            setState(() {
+                              rememberMe = value!;
+                            });
+                          },
+                          fillColor: WidgetStateProperty.resolveWith<Color>((
+                            states,
+                          ) {
+                            if (states.contains(WidgetState.selected)) {
+                              return Colors.green;
+                            }
+                            return Colors.transparent;
+                          }),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 15),
                     SizedBox(
                       width: double.infinity,
                       height: 45,
