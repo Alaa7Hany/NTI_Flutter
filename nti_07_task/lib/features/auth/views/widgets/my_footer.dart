@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
+import '../../../../core/utils/app_colors.dart';
 
 class MyFooter extends StatelessWidget {
   const MyFooter({
@@ -30,6 +30,8 @@ class MyFooter extends StatelessWidget {
           style: TextButton.styleFrom(
             backgroundColor: Colors.transparent,
             foregroundColor: AppColors.grey,
+            shadowColor: Colors.transparent,
+            overlayColor: Colors.transparent,
           ),
           child: Text(
             action,

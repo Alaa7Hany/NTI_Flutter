@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nti_06_task/pages/on_boarding.dart';
+import 'on_boarding_page.dart';
 import 'dart:async';
-import 'package:nti_06_task/utils/app_assets.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
+import '../../../core/utils/app_assets.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -27,7 +26,6 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.scaffoldBackground,
       body: Center(child: SvgPicture.asset(AppAssets.splash, fit: BoxFit.fill)),
     );
   }

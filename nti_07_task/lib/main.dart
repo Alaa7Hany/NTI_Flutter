@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'features/auth/views/login_page.dart';
 
-import 'package:nti_06_task/pages/splash.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
+import 'core/utils/app_text_styles.dart';
+
+import 'core/utils/app_colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,11 +18,13 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        fontFamily: 'Lexend Deca',
+        fontFamily: AppTextStyles.fontFamily,
+        hoverColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
         scaffoldBackgroundColor: AppColors.scaffoldBackground,
       ),
-      home: const SplashPage(),
+      home: const LoginPage(),
     );
   }
 }

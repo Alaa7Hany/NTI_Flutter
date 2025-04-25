@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nti_06_task/utils/app_assets.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
+import '../../../../core/utils/app_assets.dart';
+import '../../../../core/utils/app_colors.dart';
 
 class OptionContainer extends StatelessWidget {
   const OptionContainer({
@@ -29,7 +29,7 @@ class OptionContainer extends StatelessWidget {
           boxShadow: const [
             BoxShadow(
               color: AppColors.lightGrey,
-              blurRadius: 100,
+              blurRadius: 32,
               offset: Offset(0, 4),
             ),
           ],

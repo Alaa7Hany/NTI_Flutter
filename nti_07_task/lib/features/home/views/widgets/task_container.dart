@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:nti_06_task/models/task_model.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
+import '../../../../models/task_model.dart';
+import '../../../../core/utils/app_colors.dart';
 
 class TaskContainer extends StatelessWidget {
   final String title;

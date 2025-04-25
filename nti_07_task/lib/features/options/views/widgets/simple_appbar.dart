@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nti_06_task/utils/app_assets.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
+import '../../../../core/utils/app_assets.dart';
+import '../../../../core/utils/app_colors.dart';
 
 class SimpleAppBar {
   static AppBar build(String title, void Function()? onPressed) {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nti_06_task/models/task_model.dart';
-import 'package:nti_06_task/pages/options._page.dart';
+import '../../../core/wrapper/svg_wrapper.dart';
+import '../../../models/task_model.dart';
+import '../../options/views/options._page.dart';
 
-import 'package:nti_06_task/utils/app_assets.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
-import 'package:nti_06_task/widgets/home_appbar.dart';
-import 'package:nti_06_task/widgets/task_container.dart';
+import '../../../core/utils/app_assets.dart';
+import '../../../core/utils/app_colors.dart';
+import '../../../core/widgets/home_appbar.dart';
+import 'widgets/task_container.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -50,13 +50,12 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ),
-        backgroundColor: AppColors.scaffoldBackground,
-        body: isEmpty ? emptyBody() : normalBody(),
+        body: isEmpty ? _emptyBody() : _normalBody(),
       ),
     );
   }
 
-  Widget emptyBody() {
+  Widget _emptyBody() {
     return SizedBox(
       width: double.infinity,
       child: Column(
@@ -73,13 +72,13 @@ class _HomePageState extends State<HomePage> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 30),
-          SvgPicture.asset(AppAssets.emptyHome),
+          SvgWrappe(assetName: AppAssets.emptyHome),
         ],
       ),
     );
   }
 
-  Widget normalBody() {
+  Widget _normalBody() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
       child: SizedBox(

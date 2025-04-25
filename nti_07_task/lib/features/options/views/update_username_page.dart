@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
-import 'package:nti_06_task/widgets/main_image.dart';
-import 'package:nti_06_task/widgets/my_custom_button.dart';
-import 'package:nti_06_task/widgets/my_text_form_field.dart';
+import '../../auth/views/widgets/main_image.dart';
+import '../../../core/widgets/my_custom_button.dart';
+import '../../../core/widgets/my_text_form_field.dart';
 
 class UpdateUsernamePage extends StatefulWidget {
   const UpdateUsernamePage({super.key});
@@ -18,7 +17,6 @@ class _UpdateUsernamePageState extends State<UpdateUsernamePage> {
     final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
-      backgroundColor: AppColors.scaffoldBackground,
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nti_06_task/utils/app_assets.dart';
+
+import '../../../../core/utils/app_assets.dart';
 
 class MainImage extends StatelessWidget {
   const MainImage({super.key});

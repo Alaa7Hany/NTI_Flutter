@@ -1,8 +1,9 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
-import 'package:nti_06_task/widgets/main_image.dart';
-import 'package:nti_06_task/widgets/my_custom_button.dart';
-import 'package:nti_06_task/widgets/my_text_form_field.dart';
+import '../../auth/views/widgets/main_image.dart';
+import '../../../core/widgets/my_custom_button.dart';
+import '../../../core/widgets/my_text_form_field.dart';
 
 class UpdatePasswordPage extends StatefulWidget {
   const UpdatePasswordPage({super.key});
@@ -33,7 +34,6 @@ class _UpdatePasswordPageState extends State<UpdatePasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.scaffoldBackground,
       body: SingleChildScrollView(
         child: Column(
           children: [

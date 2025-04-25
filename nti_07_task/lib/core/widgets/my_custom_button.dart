@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
+import '../utils/app_colors.dart';
 
 class MyCustomeButton extends StatelessWidget {
   const MyCustomeButton({super.key, required this.text, this.onPressed});

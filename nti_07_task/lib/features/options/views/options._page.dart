@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nti_06_task/pages/Update_password_page.dart';
-import 'package:nti_06_task/pages/language_page.dart';
-import 'package:nti_06_task/pages/update_username_page.dart';
-import 'package:nti_06_task/utils/app_assets.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
-import 'package:nti_06_task/widgets/home_appbar.dart';
-import 'package:nti_06_task/widgets/option_container.dart';
+import 'Update_password_page.dart';
+import 'language_page.dart';
+import 'update_username_page.dart';
+import '../../../core/utils/app_assets.dart';
+import '../../../core/widgets/home_appbar.dart';
+import 'widgets/option_container.dart';
 
 class OptionsPage extends StatefulWidget {
   const OptionsPage({super.key});
@@ -19,7 +18,6 @@ class _OptionsPageState extends State<OptionsPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.scaffoldBackground,
         appBar: HomeAppBar.build(
           action: false,
           onProfilePressed: () {

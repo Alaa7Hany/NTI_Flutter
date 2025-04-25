@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nti_06_task/utils/app_assets.dart';
-import 'package:nti_06_task/widgets/my_custom_button.dart';
-import 'package:nti_06_task/widgets/my_text_form_field.dart';
-import 'package:nti_06_task/widgets/simple_appbar.dart';
+
+import '../../../core/utils/app_assets.dart';
+import '../../../core/widgets/my_custom_button.dart';
+import '../../../core/widgets/my_text_form_field.dart';
+import '../../options/views/widgets/simple_appbar.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({super.key});

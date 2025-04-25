@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nti_06_task/utils/app_assets.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
+import '../wrapper/svg_wrapper.dart';
+import '../utils/app_assets.dart';
+import '../utils/app_colors.dart';
 
 class MyTextFormField extends StatelessWidget {
   const MyTextFormField({
@@ -98,8 +98,8 @@ class MyTextFormField extends StatelessWidget {
                     width: 20,
                     child:
                         !isPassword
-                            ? SvgPicture.asset(AppAssets.profile)
-                            : SvgPicture.asset(AppAssets.password),
+                            ? SvgWrappe(assetName: AppAssets.profile)
+                            : SvgWrappe(assetName: AppAssets.password),
                   ),
                 )
                 : null,
@@ -107,10 +107,11 @@ class MyTextFormField extends StatelessWidget {
             isPassword
                 ? IconButton(
                   onPressed: onChangeVisibality,
-                  icon: SvgPicture.asset(
-                    (visibality != null ? visibality!() : false)
-                        ? AppAssets.lock
-                        : AppAssets.unlock,
+                  icon: SvgWrappe(
+                    assetName:
+                        (visibality != null ? visibality!() : false)
+                            ? AppAssets.lock
+                            : AppAssets.unlock,
                   ),
                 )
                 : null,

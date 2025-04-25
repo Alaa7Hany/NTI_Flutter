@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
-import 'package:nti_06_task/widgets/simple_appbar.dart';
+import '../../../core/utils/app_colors.dart';
+import 'widgets/simple_appbar.dart';
 
 class LanguagePage extends StatefulWidget {
   const LanguagePage({super.key});
@@ -14,7 +14,6 @@ class _LanguagePageState extends State<LanguagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.scaffoldBackground,
       appBar: SimpleAppBar.build('Settings', () {
         Navigator.pop(context);
       }),

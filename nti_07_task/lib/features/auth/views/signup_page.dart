@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nti_06_task/pages/login_page.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
-import 'package:nti_06_task/widgets/main_image.dart';
-import 'package:nti_06_task/widgets/my_custom_button.dart';
-import 'package:nti_06_task/widgets/my_footer.dart';
-import 'package:nti_06_task/widgets/my_text_form_field.dart';
+import 'login_page.dart';
+import '../../../core/utils/app_colors.dart';
+import 'widgets/main_image.dart';
+import '../../../core/widgets/my_custom_button.dart';
+import 'widgets/my_footer.dart';
+import '../../../core/widgets/my_text_form_field.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -35,7 +35,6 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.scaffoldBackground,
       body: SingleChildScrollView(
         child: Column(
           children: [

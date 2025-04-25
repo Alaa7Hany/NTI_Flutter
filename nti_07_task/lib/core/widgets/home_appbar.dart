@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nti_06_task/utils/app_assets.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
+import '../wrapper/svg_wrapper.dart';
+
+import '../utils/app_assets.dart';
+import '../utils/app_colors.dart';
 
 abstract class HomeAppBar {
   static AppBar build({
@@ -63,7 +64,7 @@ abstract class HomeAppBar {
           action
               ? [
                 IconButton(
-                  icon: SvgPicture.asset(AppAssets.plusIcon),
+                  icon: SvgWrappe(assetName: AppAssets.plusIcon),
                   onPressed: onAddPressed,
                   color: AppColors.black,
                 ),

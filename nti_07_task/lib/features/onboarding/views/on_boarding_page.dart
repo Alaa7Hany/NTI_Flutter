@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nti_06_task/pages/signup_page.dart';
-import 'package:nti_06_task/utils/app_assets.dart';
-import 'package:nti_06_task/utils/app_colors.dart';
-import 'package:nti_06_task/widgets/my_custom_button.dart';
+import '../../auth/views/signup_page.dart';
+import '../../../core/utils/app_assets.dart';
+import '../../../core/utils/app_colors.dart';
+import '../../../core/widgets/my_custom_button.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({super.key});
@@ -16,7 +16,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.scaffoldBackground,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -43,6 +42,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
                 ),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),
               SizedBox(
