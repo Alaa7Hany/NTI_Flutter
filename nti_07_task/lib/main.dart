@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nti_06_task/features/home/views/home_page.dart';
 import 'features/auth/views/login_page.dart';
 
 import 'core/utils/app_text_styles.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         splashColor: Colors.transparent,
         scaffoldBackgroundColor: AppColors.scaffoldBackground,
       ),
-      home: const LoginPage(),
+      home: const HomePage(),
     );
   }
 }

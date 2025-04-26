@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: 30),
             Expanded(
               child: ListView(
-                shrinkWrap: true,
+                //                shrinkWrap: true,
                 children: List.generate(
                   tasks.length,
                   (index) => TaskContainer(task: tasks[index]),
