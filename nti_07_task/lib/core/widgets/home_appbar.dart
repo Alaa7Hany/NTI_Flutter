@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../wrapper/svg_wrapper.dart';
 
 import '../utils/app_assets.dart';
 import '../utils/app_colors.dart';
@@ -7,14 +6,13 @@ import '../utils/app_colors.dart';
 abstract class HomeAppBar {
   static AppBar build({
     String name = 'Alaa Hany',
-    void Function()? onAddPressed,
     void Function()? onProfilePressed,
     bool action = true,
   }) {
     return AppBar(
       leading: null,
       automaticallyImplyLeading: false,
-      toolbarHeight: 100,
+      toolbarHeight: 80,
       title: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
         child: InkWell(
@@ -60,17 +58,7 @@ abstract class HomeAppBar {
           ),
         ),
       ),
-      actions:
-          action
-              ? [
-                IconButton(
-                  icon: SvgWrappe(assetName: AppAssets.plusIcon),
-                  onPressed: onAddPressed,
-                  color: AppColors.black,
-                ),
-              ]
-              : null,
-      actionsPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
+
       backgroundColor: Colors.transparent,
     );
   }

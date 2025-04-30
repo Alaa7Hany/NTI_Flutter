@@ -8,6 +8,7 @@ class SvgWrappe extends StatelessWidget {
   final BoxFit? fit;
   final AlignmentGeometry? alignment;
   final Widget? placeholder;
+  final Color? color;
 
   const SvgWrappe({
     super.key,
@@ -17,6 +18,7 @@ class SvgWrappe extends StatelessWidget {
     this.fit,
     this.alignment,
     this.placeholder,
+    this.color,
   });
 
   @override
@@ -25,6 +27,8 @@ class SvgWrappe extends StatelessWidget {
       assetName,
       width: width,
       height: height,
+      colorFilter:
+          color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
       fit: fit ?? BoxFit.cover,
       alignment: alignment ?? Alignment.center,
       placeholderBuilder:

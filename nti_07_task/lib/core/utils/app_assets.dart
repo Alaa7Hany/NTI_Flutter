@@ -12,4 +12,11 @@ abstract class AppAssets {
   static const String arrowRight = '${_basePath}arrow_right.svg';
   static const String arrowLeft = '${_basePath}arrow_left.svg';
   static const String settings = '${_basePath}Setting.svg';
+  static const String paperPlus = '${_basePath}paper_plus.svg';
+  static const String home = '${_basePath}home.svg';
+  static const String work = '${_basePath}work.svg';
+  static const String personal = '${_basePath}personal.svg';
+  static const String personalVector = '${_basePath}personal_vector.svg';
+  static const String workVector = '${_basePath}work_vector.svg';
+  static const String homeVector = '${_basePath}home_vector.svg';
 }

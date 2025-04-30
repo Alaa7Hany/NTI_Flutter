@@ -28,8 +28,7 @@ class _UpdateUsernamePageState extends State<UpdateUsernamePage> {
                 child: Column(
                   children: [
                     MyTextFormField(
-                      keyboardType: TextInputType.name,
-                      hint: 'Username',
+                      fieldType: TextFieldType.username,
                       controller: usernameController,
                     ),
 
