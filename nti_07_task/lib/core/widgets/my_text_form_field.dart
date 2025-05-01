@@ -12,12 +12,12 @@ class MyTextFormField extends StatelessWidget {
     required this.controller,
     this.passController,
     this.obsecureText = true,
-    this.onChangeVisibality,
+    this.onSuffixPressed,
   });
   final TextEditingController controller;
   final TextEditingController? passController;
   final bool obsecureText;
-  final void Function()? onChangeVisibality;
+  final void Function()? onSuffixPressed;
   final TextFieldType fieldType;
 
   @override
@@ -30,11 +30,11 @@ class MyTextFormField extends StatelessWidget {
       case TextFieldType.confirmPasword:
         return _passwordTextField(isConfirmPass: true);
       case TextFieldType.taskTitle:
-        return _normalTextField(hint: 'Title');
+        return _titleTextField();
       case TextFieldType.taskDescribtion:
-        return _normalTextField(hint: 'Describtion');
-      default:
-        return _normalTextField();
+        return _descriptionTextField();
+      case TextFieldType.group:
+        return _groupTextField();
     }
   }
 
@@ -62,21 +62,45 @@ class MyTextFormField extends StatelessWidget {
       decoration: _myInputDecoration(
         prefixIconPath: AppAssets.password,
         suffixIconPath: obsecureText ? AppAssets.lock : AppAssets.unlock,
-        onSuffixIconPressed: onChangeVisibality,
+        onSuffixIconPressed: onSuffixPressed,
         hint: isConfirmPass ? 'Confirm Password' : 'Password',
       ),
       obscureText: obsecureText,
     );
   }
 
-  Widget _normalTextField({String? hint}) {
+  Widget _titleTextField() {
+    return TextFormField(
+      maxLines: null,
+      controller: controller,
+      keyboardType: TextInputType.text,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      style: AppTextStyles.s14w300,
+      validator: _noValidation,
+      decoration: _myInputDecoration(hint: 'Title'),
+    );
+  }
+
+  Widget _descriptionTextField() {
     return TextFormField(
       controller: controller,
       keyboardType: TextInputType.text,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       style: AppTextStyles.s14w300,
       validator: _noValidation,
-      decoration: _myInputDecoration(hint: hint),
+      decoration: _myInputDecoration(hint: 'Description'),
+    );
+  }
+
+  Widget _groupTextField() {
+    return TextFormField(
+      enabled: false,
+      controller: controller,
+      keyboardType: TextInputType.text,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      style: AppTextStyles.s14w300,
+      validator: _noValidation,
+      decoration: _myInputDecoration(hint: 'Group'),
     );
   }
 
@@ -86,7 +110,7 @@ class MyTextFormField extends StatelessWidget {
   InputBorder _myInputBorder(Color borderColor) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(15),
-      borderSide: BorderSide(color: borderColor, width: 2),
+      borderSide: BorderSide(color: borderColor, width: 1),
     );
   }
 
@@ -103,17 +127,17 @@ class MyTextFormField extends StatelessWidget {
         fontWeight: FontWeight.w200,
         fontSize: 14,
       ),
-      prefixIcon: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          height: 20,
-          width: 20,
-          child:
-              prefixIconPath != null
-                  ? SvgWrappe(assetName: prefixIconPath)
-                  : null,
-        ),
-      ),
+      prefixIcon:
+          prefixIconPath != null
+              ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: SvgWrappe(assetName: prefixIconPath),
+                ),
+              )
+              : null,
       suffixIcon:
           suffixIconPath != null
               ? IconButton(
@@ -124,8 +148,8 @@ class MyTextFormField extends StatelessWidget {
       enabledBorder: _myInputBorder(AppColors.lightGrey),
       errorBorder: _myInputBorder(Colors.red),
       focusedErrorBorder: _myInputBorder(Colors.red),
-      focusedBorder: _myInputBorder(Colors.green),
-      disabledBorder: _myInputBorder(Colors.grey),
+      focusedBorder: _myInputBorder(AppColors.primaryColor),
+      disabledBorder: _myInputBorder(AppColors.lightGrey),
       fillColor: Colors.white,
       filled: true,
     );
@@ -144,7 +168,6 @@ class MyTextFormField extends StatelessWidget {
   }
 
   String? _validateConfirmPass(String? value) {
-    print('Confirm: $value, Original: ${passController?.text}');
     if (value == null || value.isEmpty) {
       return 'Password is required';
     } else if (passController == null || passController!.text != value) {
@@ -177,5 +200,5 @@ enum TextFieldType {
   confirmPasword,
   taskTitle,
   taskDescribtion,
-  normal,
+  group,
 }

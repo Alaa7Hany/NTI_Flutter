@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:nti_06_task/core/widgets/date_field.dart';
+import 'package:nti_06_task/features/add_task/views/widgets/add_task_image.dart';
 
 import '../../../core/utils/app_assets.dart';
 import '../../../core/widgets/my_custom_button.dart';
 import '../../../core/widgets/my_text_form_field.dart';
-import '../../options/views/widgets/simple_appbar.dart';
+import '../../../core/widgets/simple_appbar.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({super.key});
@@ -15,45 +17,55 @@ class AddTaskPage extends StatefulWidget {
 class _AddTaskPageState extends State<AddTaskPage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController groupController = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar.build('Add Task', () {
-        Navigator.pop(context);
-      }),
+      appBar: SimpleAppBar.build(
+        title: 'Add Task',
+        onBack: () {
+          Navigator.pop(context);
+        },
+      ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         width: double.infinity,
         child: Form(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 40),
-              Container(
-                height: 200,
-                width: 250,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 10),
+                AddTaskImage(),
+                SizedBox(height: 30),
+                MyTextFormField(
+                  fieldType: TextFieldType.taskTitle,
+                  controller: titleController,
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(AppAssets.logo, fit: BoxFit.cover),
+                SizedBox(height: 15),
+                MyTextFormField(
+                  fieldType: TextFieldType.taskDescribtion,
+                  controller: descriptionController,
                 ),
-              ),
-              SizedBox(height: 30),
-              MyTextFormField(
-                fieldType: TextFieldType.taskTitle,
-                controller: titleController,
-              ),
-              SizedBox(height: 20),
-              MyTextFormField(
-                fieldType: TextFieldType.taskDescribtion,
-                controller: descriptionController,
-              ),
-              SizedBox(height: 30),
-              MyCustomeButton(text: 'Add Task', onPressed: () {}),
-            ],
+                SizedBox(height: 15),
+                MyTextFormField(
+                  fieldType: TextFieldType.group,
+                  controller: groupController,
+                ),
+                SizedBox(height: 15),
+                DateField(),
+                SizedBox(height: 15),
+                MyCustomeButton(
+                  text: 'Add Task',
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                SizedBox(height: 50),
+              ],
+            ),
           ),
         ),
       ),

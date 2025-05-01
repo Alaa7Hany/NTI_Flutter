@@ -19,4 +19,8 @@ abstract class AppAssets {
   static const String personalVector = '${_basePath}personal_vector.svg';
   static const String workVector = '${_basePath}work_vector.svg';
   static const String homeVector = '${_basePath}home_vector.svg';
+  static const String search = '${_basePath}search.svg';
+  static const String filter = '${_basePath}filter.svg';
+  static const String calender = '${_basePath}calendar.svg';
+  static const String delete = '${_basePath}delete.svg';
 }

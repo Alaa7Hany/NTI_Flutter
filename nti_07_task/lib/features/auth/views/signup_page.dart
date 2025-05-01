@@ -46,8 +46,7 @@ class SignupPage extends StatelessWidget {
                             builder: (context, state) {
                               return MyTextFormField(
                                 fieldType: TextFieldType.password,
-                                onChangeVisibality:
-                                    cubit.onChangeVisibalityPresed,
+                                onSuffixPressed: cubit.onChangeVisibalityPresed,
                                 controller: cubit.passwordController,
                                 obsecureText: cubit.visibality,
                               );
@@ -64,8 +63,7 @@ class SignupPage extends StatelessWidget {
                                 fieldType: TextFieldType.confirmPasword,
                                 obsecureText: cubit.visibality,
                                 passController: cubit.passwordController,
-                                onChangeVisibality:
-                                    cubit.onChangeVisibalityPresed,
+                                onSuffixPressed: cubit.onChangeVisibalityPresed,
                                 controller: cubit.confirmPassController,
                               );
                             },

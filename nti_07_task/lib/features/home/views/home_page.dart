@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:nti_06_task/core/utils/app_text_styles.dart';
+import 'package:nti_06_task/features/add_task/edit_task_page.dart';
+import 'package:nti_06_task/features/add_task/views/add_task_page.dart';
 import 'package:nti_06_task/features/home/data/my_tasks.dart';
+import 'package:nti_06_task/features/home/views/today_tasks_page.dart';
+import 'package:nti_06_task/features/home/views/widgets/floating_button.dart';
 import 'package:nti_06_task/features/home/views/widgets/in_progress_task_card.dart';
 import 'package:nti_06_task/features/home/views/widgets/overall_task_container.dart';
 import 'package:nti_06_task/features/home/views/widgets/task_group_container.dart';
+import 'package:nti_06_task/features/home/views/widgets/title_with_Counter.dart';
 import '../../../core/wrapper/svg_wrapper.dart';
 import '../data/models/task_model.dart';
 import '../../options/views/options._page.dart';
@@ -32,7 +37,7 @@ class HomePage extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (context) {
-          return const OptionsPage();
+          return const TodayTasksPage();
         },
       ),
     );
@@ -43,7 +48,7 @@ class HomePage extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (context) {
-          return const OptionsPage();
+          return EditTaskPage();
         },
       ),
     );
@@ -54,7 +59,7 @@ class HomePage extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (context) {
-          return const OptionsPage();
+          return const TodayTasksPage();
         },
       ),
     );
@@ -65,7 +70,7 @@ class HomePage extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (context) {
-          return const OptionsPage();
+          return AddTaskPage();
         },
       ),
     );
@@ -80,16 +85,9 @@ class HomePage extends StatelessWidget {
     ////////////////////////////////////
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: SizedBox(
-          width: 50,
-          height: 50,
-          child: FloatingActionButton(
-            onPressed: () => _onaddTaskPressed(context),
-            backgroundColor: AppColors.primaryColor,
-            elevation: 4,
-            shape: CircleBorder(),
-            child: SvgWrappe(assetName: AppAssets.paperPlus),
-          ),
+        floatingActionButton: MyFloatingButton(
+          assetName: AppAssets.paperPlus,
+          onPressed: () => _onaddTaskPressed(context),
         ),
         appBar: HomeAppBar.build(
           name: 'Alaa Hany',
@@ -138,30 +136,14 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 10),
               OverallTaskContainer(
                 tasks: MyTasks.myTasks,
                 onViewTasksPressed: () => _onViewTasksPressed(context),
               ),
-              Row(
-                children: [
-                  Text('In Progress', style: AppTextStyles.s14w300),
-                  Container(
-                    margin: const EdgeInsetsDirectional.only(start: 20),
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      color: AppColors.lightGreen,
-                    ),
-                    child: Text(
-                      inProgressTasks.length.toString(),
-                      style: AppTextStyles.s14w400.copyWith(
-                        color: AppColors.primaryColor,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
+              TitleWithCounter(
+                counter: inProgressTasks.length,
+                title: 'In Progress',
               ),
               const SizedBox(height: 23),
               SizedBox(

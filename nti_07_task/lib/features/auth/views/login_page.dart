@@ -39,7 +39,7 @@ class LoginPage extends StatelessWidget {
                           BlocBuilder<LoginCubit, LoginState>(
                             builder: (context, state) {
                               return MyTextFormField(
-                                onChangeVisibality:
+                                onSuffixPressed:
                                     () => cubit.onChangeVisibalityPresed(),
                                 controller: cubit.passwordController,
                                 fieldType: TextFieldType.password,
