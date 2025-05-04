@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:nti_11_task/core/helper/get_helper.dart';
 import 'Update_password_page.dart';
 import 'language_page.dart';
 import 'update_username_page.dart';
@@ -21,7 +23,7 @@ class _OptionsPageState extends State<OptionsPage> {
         appBar: HomeAppBar.build(
           action: false,
           onProfilePressed: () {
-            Navigator.pop(context);
+            GetHelper.pop();
           },
         ),
         body: Container(
@@ -32,42 +34,21 @@ class _OptionsPageState extends State<OptionsPage> {
                 title: 'Update Profile',
                 icon: AppAssets.profile,
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const UpdateUsernamePage();
-                      },
-                    ),
-                  );
+                  GetHelper.push(() => const UpdateUsernamePage());
                 },
               ),
               OptionContainer(
                 title: 'Change Password',
                 icon: AppAssets.lock,
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const UpdatePasswordPage();
-                      },
-                    ),
-                  );
+                  GetHelper.push(() => const UpdatePasswordPage());
                 },
               ),
               OptionContainer(
                 title: 'Settings',
                 icon: AppAssets.settings,
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const LanguagePage();
-                      },
-                    ),
-                  );
+                  GetHelper.push(() => const LanguagePage());
                 },
               ),
             ],
