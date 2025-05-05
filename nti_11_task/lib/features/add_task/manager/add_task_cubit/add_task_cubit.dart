@@ -70,7 +70,7 @@ class AddTaskCubit extends Cubit<AddTaskState> {
           ),
         );
         log(
-          'message from add task cubit: ${userCubit.userModel?.tasks.length}',
+          'message from add task cubit: ${userCubit.userModel?.tasks?.length}',
         );
         emit(AddTaskSuccess());
       } else {
