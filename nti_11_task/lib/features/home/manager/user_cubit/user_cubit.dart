@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:nti_11_task/features/home/data/models/task_model.dart';
 
 import '../../data/models/user_model.dart';
 import 'user_state.dart';
@@ -24,5 +26,23 @@ class UserCubit extends Cubit<UserState> {
     }
 
     emit(UpdateUserNameState());
+  }
+
+  void updateUserImage(XFile image) {
+    if (userModel == null) {
+      userModel = UserModel(image: image);
+    } else {
+      userModel?.image = image;
+    }
+    emit(UpdateUserImageState());
+  }
+
+  void addTask(TaskModel task) {
+    if (userModel == null) {
+      userModel = UserModel(tasks: [task]);
+    } else {
+      userModel?.tasks.add(task);
+    }
+    emit((UserAddTaskState()));
   }
 }

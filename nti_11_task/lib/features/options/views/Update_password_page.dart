@@ -1,7 +1,8 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import '../../auth/views/widgets/main_image.dart';
+import '../../../core/utils/app_assets.dart';
+import '../../../core/widgets/main_image.dart';
 import '../../../core/widgets/my_custom_button.dart';
 import '../../../core/widgets/my_text_form_field.dart';
 
@@ -37,7 +38,7 @@ class _UpdatePasswordPageState extends State<UpdatePasswordPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            MainImage(),
+            MainImage(image: Image.asset(AppAssets.logo)),
             Form(
               key: _formKey,
               child: Padding(

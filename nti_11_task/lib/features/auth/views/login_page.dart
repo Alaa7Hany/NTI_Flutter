@@ -11,7 +11,7 @@ import '../../home/views/home_page.dart';
 import '../../../core/widgets/my_custom_button.dart';
 import '../../../core/widgets/my_text_form_field.dart';
 import 'signup_page.dart';
-import 'widgets/main_image.dart';
+import '../../../core/widgets/main_image.dart';
 import 'widgets/my_footer.dart';
 
 class LoginPage extends StatelessWidget {
@@ -28,7 +28,7 @@ class LoginPage extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  MainImage(),
+                  MainImage(image: Image.asset(AppAssets.logo)),
                   Form(
                     key: cubit.formKey,
                     child: Padding(

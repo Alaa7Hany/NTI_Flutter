@@ -1,17 +1,19 @@
 abstract class UpdateUsernameState {}
 
-class UpdateUsernameInitialState extends UpdateUsernameState {}
+class UpdateUsernameInitial extends UpdateUsernameState {}
 
-class UpdateUsernameLoadingState extends UpdateUsernameState {}
+class UpdateUsernameLoading extends UpdateUsernameState {}
 
-class UpdateUsernameSuccessState extends UpdateUsernameState {
+class UpdateUsernameSuccess extends UpdateUsernameState {
   final String username;
 
-  UpdateUsernameSuccessState(this.username);
+  UpdateUsernameSuccess(this.username);
 }
 
-class UpdateUsernameErrorState extends UpdateUsernameState {
+class UpdateUsernameError extends UpdateUsernameState {
   final String error;
 
-  UpdateUsernameErrorState(this.error);
+  UpdateUsernameError(this.error);
 }
+
+class UpdateUsernameImageSuccess extends UpdateUsernameState {}

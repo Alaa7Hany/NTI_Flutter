@@ -1,10 +1,14 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nti_11_task/core/helper/get_helper.dart';
 import 'package:nti_11_task/features/home/manager/user_cubit/user_cubit.dart';
 import 'package:nti_11_task/features/home/manager/user_cubit/user_state.dart';
 import 'package:nti_11_task/features/options/manager/update_username_cubit/update_username_cubit.dart';
-import '../../auth/views/widgets/main_image.dart';
+import '../../../core/utils/app_assets.dart';
+import '../../../core/widgets/main_image.dart';
 import '../../../core/widgets/my_custom_button.dart';
 import '../../../core/widgets/my_text_form_field.dart';
 import '../manager/update_username_cubit/update_username._state.dart';
@@ -23,7 +27,37 @@ class UpdateUsernamePage extends StatelessWidget {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  MainImage(),
+                  BlocBuilder<UpdateUsernameCubit, UpdateUsernameState>(
+                    builder: (context, state) {
+                      return MainImage(
+                        onTap: () {
+                          try {
+                            cubit.changeImage();
+                          } on Exception catch (e) {
+                            log('Image picker error: $e');
+                          }
+                        },
+                        // This whole thing just to avoid null in every way
+                        // once we have an initial user model like usual we will minimize this code
+                        image:
+                            cubit.imageFile == null
+                                ? (UserCubit.get(
+                                          context,
+                                        ).userModel?.image?.path !=
+                                        null
+                                    ? Image.file(
+                                      File(
+                                        UserCubit.get(
+                                              context,
+                                            ).userModel?.image?.path ??
+                                            '',
+                                      ),
+                                    )
+                                    : Image.asset(AppAssets.logo))
+                                : Image.file(File(cubit.imageFile!.path)),
+                      );
+                    },
+                  ),
                   Form(
                     key: cubit.formKey,
                     child: Padding(
@@ -41,9 +75,9 @@ class UpdateUsernamePage extends StatelessWidget {
                             UpdateUsernameState
                           >(
                             listener: (context, state) {
-                              if (state is UpdateUsernameSuccessState) {
+                              if (state is UpdateUsernameSuccess) {
                                 GetHelper.pop();
-                              } else if (state is UpdateUsernameErrorState) {
+                              } else if (state is UpdateUsernameError) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(content: Text(state.error)),
                                 );
@@ -52,7 +86,7 @@ class UpdateUsernamePage extends StatelessWidget {
                             builder: (context, state) {
                               return MyCustomeButton(
                                 text: 'Update',
-                                isLoading: state is UpdateUsernameLoadingState,
+                                isLoading: state is UpdateUsernameLoading,
                                 onPressed: () {
                                   cubit.updateUsername(UserCubit.get(context));
                                 },

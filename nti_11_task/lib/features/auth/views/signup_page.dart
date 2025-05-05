@@ -3,13 +3,14 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nti_11_task/core/helper/get_helper.dart';
+import '../../../core/utils/app_assets.dart';
 import '../manager/signup_cubit/signup_cubit.dart';
 import '../manager/signup_cubit/signup_state.dart';
 import 'widgets/my_gender_drodown_menue.dart';
 import '../../home/views/home_page.dart';
 import 'login_page.dart';
 import '../../../core/utils/app_colors.dart';
-import 'widgets/main_image.dart';
+import '../../../core/widgets/main_image.dart';
 import '../../../core/widgets/my_custom_button.dart';
 import 'widgets/my_footer.dart';
 import '../../../core/widgets/my_text_form_field.dart';
@@ -28,7 +29,7 @@ class SignupPage extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  MainImage(),
+                  MainImage(image: Image.asset(AppAssets.logo)),
                   Form(
                     key: cubit.formKey,
                     child: Padding(

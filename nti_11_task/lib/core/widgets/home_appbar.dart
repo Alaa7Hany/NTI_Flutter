@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,6 +16,7 @@ abstract class HomeAppBar {
       toolbarHeight: 80,
       title: BlocBuilder<UserCubit, UserState>(
         builder: (context, state) {
+          var cubit = UserCubit.get(context);
           return Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
             child: InkWell(
@@ -24,12 +27,15 @@ abstract class HomeAppBar {
                     radius: 30,
                     backgroundColor: AppColors.scaffoldBackground,
                     child: ClipOval(
-                      child: Image.asset(
-                        AppAssets.profileImage,
-                        fit: BoxFit.cover,
-                        width: 60,
-                        height: 60,
-                      ),
+                      child:
+                          cubit.userModel?.image != null
+                              ? Image.file(File(cubit.userModel!.image!.path))
+                              : Image.asset(
+                                AppAssets.profileImage,
+                                fit: BoxFit.cover,
+                                width: 60,
+                                height: 60,
+                              ),
                     ),
                   ),
                   SizedBox(width: 20),

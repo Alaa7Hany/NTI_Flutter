@@ -16,6 +16,7 @@ class MyTextFormField extends StatelessWidget {
     this.onSuffixPressed,
     this.items,
     this.onDropDownChanged,
+    this.selectedDropDownValue,
   });
   final TextEditingController controller;
   final TextEditingController? passController;
@@ -24,6 +25,7 @@ class MyTextFormField extends StatelessWidget {
   final TextFieldType fieldType;
   final List<GroupModel>? items;
   final void Function(dynamic value)? onDropDownChanged;
+  final GroupModel? selectedDropDownValue;
 
   @override
   Widget build(BuildContext context) {
@@ -93,19 +95,21 @@ class MyTextFormField extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       style: AppTextStyles.s14w300,
       validator: _noValidation,
+      maxLines: null,
+      minLines: 1,
       decoration: _myInputDecoration(hint: 'Description'),
     );
   }
 
   Widget _groupTextField() {
-    return DropdownButtonFormField(
+    return DropdownButtonFormField<GroupModel>(
       items:
           items!.map((item) {
             return DropdownMenuItem(
               value: item,
               child: Row(
                 children: [
-                  SvgWrappe(assetName: item.iconPath),
+                  SvgWrappe(assetName: item.iconPath, fit: BoxFit.scaleDown),
                   const SizedBox(width: 10),
                   Text(item.name, style: AppTextStyles.s14w300),
                 ],
@@ -113,7 +117,13 @@ class MyTextFormField extends StatelessWidget {
             );
           }).toList(),
       onChanged: onDropDownChanged,
-
+      validator: (value) {
+        if (value == null) {
+          return 'Please select an option';
+        }
+        return null;
+      },
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       style: AppTextStyles.s14w200.copyWith(color: AppColors.grey),
       decoration: _myInputDecoration(hint: 'Group'),
     );

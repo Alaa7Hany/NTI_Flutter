@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../utils/app_assets.dart';
@@ -6,10 +8,12 @@ import '../utils/app_text_styles.dart';
 import '../wrapper/svg_wrapper.dart';
 
 class DateField extends StatelessWidget {
-  const DateField({super.key, this.dateTime});
+  const DateField({super.key, this.dateTime, this.onDateChanged});
   final DateTime? dateTime;
+  final void Function(DateTime?)? onDateChanged;
   @override
   Widget build(BuildContext context) {
+    final initialDate = DateTime.now().copyWith(day: DateTime.now().day + 1);
     return Container(
       height: 50,
       decoration: BoxDecoration(
@@ -19,10 +23,10 @@ class DateField extends StatelessWidget {
       ),
       child: TextField(
         readOnly: true,
-        onTap: () {
-          showDatePicker(
+        onTap: () async {
+          final pickedDate = await showDatePicker(
             context: context,
-            initialDate: DateTime.now(),
+            initialDate: initialDate,
             firstDate: DateTime(2025),
             lastDate: DateTime(2026),
             builder: (context, child) {
@@ -40,6 +44,11 @@ class DateField extends StatelessWidget {
               );
             },
           );
+          if (pickedDate == null) {
+            onDateChanged!(initialDate);
+          } else {
+            onDateChanged!(pickedDate);
+          }
         },
         canRequestFocus: false,
 
@@ -47,7 +56,7 @@ class DateField extends StatelessWidget {
           label: Text(
             DateFormat(
               'd MMMM, y\t h:mm a',
-            ).format(dateTime ?? DateTime.now()).toString(),
+            ).format(dateTime ?? initialDate).toString(),
             style: AppTextStyles.s14w300.copyWith(color: AppColors.black),
             textAlign: TextAlign.center,
           ),

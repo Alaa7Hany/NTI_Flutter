@@ -32,7 +32,6 @@ class LoginCubit extends Cubit<LoginState> {
           userModel: UserModel(
             name: usernameController.text,
             password: passwordController.text,
-            image: AppAssets.profileImage,
           ),
         ),
       );
