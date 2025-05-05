@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../core/helper/get_helper.dart';
+import '../../../core/cache/cache_helper.dart';
+import '../../../core/cache/cache_keys.dart';
 import '../../auth/views/signup_page.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
@@ -50,13 +53,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 height: 50,
                 child: MyCustomeButton(
                   text: 'Let\'s Start',
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SignupPage(),
-                      ),
+                  onPressed: () async {
+                    await CacheHelper.saveData(
+                      key: CacheKeys.firstTime,
+                      value: false,
                     );
+                    GetHelper.pushReplace(() => SignupPage());
                   },
                 ),
               ),

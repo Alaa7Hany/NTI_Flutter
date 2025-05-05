@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import '../utils/app_assets.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_text_styles.dart';
@@ -27,7 +26,7 @@ class DateField extends StatelessWidget {
           final pickedDate = await showDatePicker(
             context: context,
             initialDate: initialDate,
-            firstDate: DateTime(2025),
+            firstDate: DateTime.now(),
             lastDate: DateTime(2026),
             builder: (context, child) {
               return Theme(

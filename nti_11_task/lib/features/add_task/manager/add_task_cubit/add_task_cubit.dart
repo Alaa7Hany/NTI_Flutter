@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nti_11_task/features/add_task/manager/add_task_cubit/add_task_state.dart';
-import 'package:nti_11_task/features/home/data/my_tasks.dart';
+import 'add_task_state.dart';
+import '../../../home/data/my_tasks.dart';
 
 import '../../../../core/utils/app_assets.dart';
 import '../../../home/data/models/task_model.dart';
@@ -66,6 +66,7 @@ class AddTaskCubit extends Cubit<AddTaskState> {
             taskState: TaskStatus.inProgress,
             taskType: taskGroup,
             endTime: endDate,
+            imageFile: imageFile,
           ),
         );
         log(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_styles.dart';
 import '../../data/models/task_model.dart';
-import '../../../../core/utils/app_colors.dart';
 
 class OverallTaskContainer extends StatelessWidget {
   const OverallTaskContainer({

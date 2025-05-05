@@ -1,3 +1,5 @@
+import 'package:image_picker/image_picker.dart';
+
 class TaskModel {
   int id;
   String title;
@@ -5,6 +7,7 @@ class TaskModel {
   TaskStatus taskState;
   TaskGroup taskType;
   DateTime? endTime;
+  XFile? imageFile;
 
   TaskModel({
     required this.id,
@@ -13,6 +16,7 @@ class TaskModel {
     required this.taskState,
     required this.taskType,
     this.endTime,
+    this.imageFile,
   });
 }
 

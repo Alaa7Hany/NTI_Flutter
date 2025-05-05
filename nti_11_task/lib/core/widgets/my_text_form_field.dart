@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nti_11_task/features/add_task/data/models/group_model.dart';
+import '../../features/add_task/data/models/group_model.dart';
 import '../utils/app_text_styles.dart';
 
 import '../wrapper/svg_wrapper.dart';
@@ -104,7 +104,7 @@ class MyTextFormField extends StatelessWidget {
   Widget _groupTextField() {
     return DropdownButtonFormField<GroupModel>(
       items:
-          items!.map((item) {
+          items?.map((item) {
             return DropdownMenuItem(
               value: item,
               child: Row(
@@ -115,7 +115,8 @@ class MyTextFormField extends StatelessWidget {
                 ],
               ),
             );
-          }).toList(),
+          }).toList() ??
+          [],
       onChanged: onDropDownChanged,
       validator: (value) {
         if (value == null) {

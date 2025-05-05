@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+
 import '../../../../core/utils/app_assets.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_styles.dart';
@@ -43,7 +46,10 @@ class TaskCard extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(7),
-              child: Image.asset(AppAssets.profileImage, fit: BoxFit.fill),
+              child:
+                  task.imageFile?.path != null
+                      ? Image.file(File(task.imageFile!.path))
+                      : Image.asset(AppAssets.profileImage, fit: BoxFit.fill),
             ),
           ),
           const SizedBox(width: 10),

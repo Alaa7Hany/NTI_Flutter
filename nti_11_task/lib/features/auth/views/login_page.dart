@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nti_11_task/core/helper/get_helper.dart';
-import 'package:nti_11_task/core/utils/app_assets.dart';
-import 'package:nti_11_task/features/home/manager/user_cubit/user_cubit.dart';
-import '../../home/data/models/user_model.dart';
+import '../../../core/helper/get_helper.dart';
+import '../../../core/utils/app_assets.dart';
+import '../../home/manager/user_cubit/user_cubit.dart';
 import '../manager/login_cubit/login_cubit.dart';
 import '../manager/login_cubit/login_state.dart';
 import '../../home/views/home_page.dart';

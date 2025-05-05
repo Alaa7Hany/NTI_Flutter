@@ -3,10 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nti_11_task/core/helper/get_helper.dart';
-import 'package:nti_11_task/features/home/manager/user_cubit/user_cubit.dart';
-import 'package:nti_11_task/features/home/manager/user_cubit/user_state.dart';
-import 'package:nti_11_task/features/options/manager/update_username_cubit/update_username_cubit.dart';
+import '../../../core/helper/get_helper.dart';
+import '../../home/manager/user_cubit/user_cubit.dart';
+import '../manager/update_username_cubit/update_username_cubit.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/widgets/main_image.dart';
 import '../../../core/widgets/my_custom_button.dart';

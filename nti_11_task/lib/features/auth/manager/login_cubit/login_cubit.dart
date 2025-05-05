@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nti_11_task/core/utils/app_assets.dart';
 import '../../../home/data/models/user_model.dart';
 import 'login_state.dart';
 

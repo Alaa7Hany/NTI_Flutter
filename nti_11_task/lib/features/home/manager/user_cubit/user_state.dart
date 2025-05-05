@@ -9,3 +9,5 @@ class UpdateUserNameState extends UserState {}
 class UpdateUserImageState extends UserState {}
 
 class UserAddTaskState extends UserState {}
+
+class UserEditTaskState extends UserState {}

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../utils/app_assets.dart';
-
 class MainImage extends StatelessWidget {
   const MainImage({super.key, required this.image, this.onTap});
   final Image image;

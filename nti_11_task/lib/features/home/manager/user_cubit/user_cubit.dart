@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nti_11_task/features/home/data/models/task_model.dart';
+import '../../data/models/task_model.dart';
 
 import '../../data/models/user_model.dart';
 import 'user_state.dart';
@@ -44,5 +44,14 @@ class UserCubit extends Cubit<UserState> {
       userModel?.tasks.add(task);
     }
     emit((UserAddTaskState()));
+  }
+
+  void editTask(TaskModel task) {
+    if (userModel == null) {
+      userModel = UserModel(tasks: [task]);
+    } else {
+      userModel?.tasks.add(task);
+    }
+    emit((UserEditTaskState()));
   }
 }

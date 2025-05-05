@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:nti_11_task/core/helper/get_helper.dart';
+import '../../../core/helper/get_helper.dart';
 import 'Update_password_page.dart';
 import 'language_page.dart';
 import 'update_username_page.dart';

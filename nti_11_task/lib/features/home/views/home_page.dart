@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nti_11_task/core/helper/get_helper.dart';
-import 'package:nti_11_task/features/home/manager/user_cubit/user_cubit.dart';
+import '../../../core/helper/get_helper.dart';
+import '../manager/user_cubit/user_cubit.dart';
 import '../../../core/utils/app_text_styles.dart';
 import '../../add_task/views/edit_task_page.dart';
 import '../../add_task/views/add_task_page.dart';
-import '../data/my_tasks.dart';
 import '../manager/user_cubit/user_state.dart';
 import 'today_tasks_page.dart';
 import 'widgets/floating_button.dart';
@@ -49,27 +48,27 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ///////////////____Variables___/////////////////
-    final bool isEmpty =
-        UserCubit.get(context).userModel?.tasks.isEmpty ?? true;
 
     ////////////////////////////////////
     return SafeArea(
-      child: Scaffold(
-        floatingActionButton: MyFloatingButton(
-          assetName: AppAssets.paperPlus,
-          onPressed: () => _onaddTaskPressed(context),
-        ),
-        appBar: HomeAppBar.build(
-          onProfilePressed: () => _onAppBartapped(context),
-        ),
-        body: BlocConsumer<UserCubit, UserState>(
-          listener: (context, state) {
-            // TODO: implement listener
-          },
-          builder: (context, state) {
-            return isEmpty ? _emptyBody() : _normalBody(context);
-          },
-        ),
+      child: BlocConsumer<UserCubit, UserState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          final bool isEmpty =
+              UserCubit.get(context).userModel?.tasks.isEmpty ?? true;
+          return Scaffold(
+            floatingActionButton: MyFloatingButton(
+              assetName: AppAssets.paperPlus,
+              onPressed: () => _onaddTaskPressed(context),
+            ),
+            appBar: HomeAppBar.build(
+              onProfilePressed: () => _onAppBartapped(context),
+            ),
+            body: isEmpty ? _emptyBody() : _normalBody(context),
+          );
+        },
       ),
     );
   }

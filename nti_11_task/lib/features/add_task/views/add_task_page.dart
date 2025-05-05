@@ -3,11 +3,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nti_11_task/core/helper/get_helper.dart';
-import 'package:nti_11_task/core/utils/app_assets.dart';
+import '../../../core/helper/get_helper.dart';
+import '../../../core/utils/app_assets.dart';
 
-import 'package:nti_11_task/features/add_task/manager/add_task_cubit/add_task_cubit.dart';
-import 'package:nti_11_task/features/home/manager/user_cubit/user_cubit.dart';
+import '../manager/add_task_cubit/add_task_cubit.dart';
+import '../../home/manager/user_cubit/user_cubit.dart';
 import '../../../core/widgets/date_field.dart';
 import '../manager/add_task_cubit/add_task_state.dart';
 import 'widgets/add_task_image.dart';

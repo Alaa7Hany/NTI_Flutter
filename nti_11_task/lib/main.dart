@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:nti_11_task/core/helper/responsive.dart';
-import 'package:nti_11_task/features/home/views/home_page.dart';
-import 'package:nti_11_task/features/options/views/options._page.dart';
+import 'features/onboarding/views/splash_page.dart';
 
-import 'features/auth/views/login_page.dart';
+import 'core/cache/cache_helper.dart';
 
 import 'core/utils/app_text_styles.dart';
 
 import 'core/utils/app_colors.dart';
 import 'features/home/manager/user_cubit/user_cubit.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
   runApp(const MyApp());
 }
 
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
               splashColor: Colors.transparent,
               scaffoldBackgroundColor: AppColors.scaffoldBackground,
             ),
-            home: HomePage(),
+            home: SplashPage(),
           );
         },
       ),

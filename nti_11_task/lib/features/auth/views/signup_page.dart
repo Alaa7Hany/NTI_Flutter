@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nti_11_task/core/helper/get_helper.dart';
+import '../../../core/helper/get_helper.dart';
 import '../../../core/utils/app_assets.dart';
 import '../manager/signup_cubit/signup_cubit.dart';
 import '../manager/signup_cubit/signup_state.dart';
