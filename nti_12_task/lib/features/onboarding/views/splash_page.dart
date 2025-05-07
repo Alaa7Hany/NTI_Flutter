@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nti_12_task/features/home/views/home_page.dart';
+import '../../home/views/home_page.dart';
 import '../../../core/helper/get_helper.dart';
 import '../../auth/views/login_page.dart';
 import '../../../core/cache/cache_data.dart';

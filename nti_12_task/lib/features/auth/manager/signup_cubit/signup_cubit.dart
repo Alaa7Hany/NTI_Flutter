@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import '../../data/repo/user_repo.dart';
+import '../../../home/data/repo/tasks_repo.dart';
 import 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
@@ -30,6 +33,13 @@ class SignupCubit extends Cubit<SignupState> {
     emit(SignupShowPassState());
   }
 
+  XFile? imageFile;
+  void onChangeImage() async {
+    final ImagePicker imagePicker = ImagePicker();
+    imageFile = await imagePicker.pickImage(source: ImageSource.gallery);
+    emit(SignupChangeImageState());
+  }
+
   void onSignupPressed() {
     emit(SignupLoading());
     Future.delayed(const Duration(seconds: 2), () {
@@ -37,6 +47,13 @@ class SignupCubit extends Cubit<SignupState> {
         emit(SignupError());
         return;
       }
+      UserRepo userRepo = UserRepo();
+      TasksRepo tasksRepo = TasksRepo();
+      userRepo.userModel.name = usernameController.text;
+      userRepo.userModel.password = passwordController.text;
+      userRepo.userModel.image = imageFile;
+      // Tie the tasks in the userModel with the tasksRepo
+      userRepo.userModel.tasks = tasksRepo.tasks;
       emit(SignupSuccess());
     });
   }

@@ -1,17 +1,21 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart'; // Add this import for `.tr`
+
 import '../../../core/helper/get_helper.dart';
+import '../../../core/translation/translation_keys.dart';
 import '../../../core/utils/app_assets.dart';
-import '../manager/signup_cubit/signup_cubit.dart';
-import '../manager/signup_cubit/signup_state.dart';
-import 'widgets/my_gender_drodown_menue.dart';
-import '../../home/views/home_page.dart';
-import 'login_page.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/main_image.dart';
 import '../../../core/widgets/my_custom_button.dart';
-import 'widgets/my_footer.dart';
 import '../../../core/widgets/my_text_form_field.dart';
+import '../manager/signup_cubit/signup_cubit.dart';
+import '../manager/signup_cubit/signup_state.dart';
+import 'login_page.dart';
+import 'widgets/my_footer.dart';
+import 'widgets/my_gender_drodown_menue.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
@@ -27,7 +31,22 @@ class SignupPage extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  MainImage(image: Image.asset(AppAssets.logo)),
+                  BlocBuilder<SignupCubit, SignupState>(
+                    builder: (context, state) {
+                      return MainImage(
+                        onTap: () {
+                          cubit.onChangeImage();
+                        },
+                        image:
+                            cubit.imageFile != null
+                                ? Image.file(
+                                  File(cubit.imageFile!.path),
+                                  fit: BoxFit.cover,
+                                )
+                                : Image.asset(AppAssets.logo),
+                      );
+                    },
+                  ),
                   Form(
                     key: cubit.formKey,
                     child: Padding(
@@ -73,7 +92,9 @@ class SignupPage extends StatelessWidget {
                               MyGenderDrodownMenue(cubit: cubit),
                               Spacer(),
                               Text(
-                                'Remember me?',
+                                TranslationKeys
+                                    .rememberMe
+                                    .tr, // Replaced string
                                 style: const TextStyle(
                                   color: AppColors.black,
                                   fontSize: 14,
@@ -111,11 +132,15 @@ class SignupPage extends StatelessWidget {
                           BlocConsumer<SignupCubit, SignupState>(
                             listener: (context, state) {
                               if (state is SignupSuccess) {
-                                GetHelper.pushReplaceAll(() => HomePage());
+                                GetHelper.pushReplaceAll(() => LoginPage());
                               } else if (state is SignupError) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Signup Failed'),
+                                  SnackBar(
+                                    content: Text(
+                                      TranslationKeys
+                                          .signupFailed
+                                          .tr, // Replaced string
+                                    ),
                                   ),
                                 );
                               }
@@ -123,7 +148,10 @@ class SignupPage extends StatelessWidget {
                             builder: (context, state) {
                               return MyCustomeButton(
                                 isLoading: state is SignupLoading,
-                                text: 'Register',
+                                text:
+                                    TranslationKeys
+                                        .register
+                                        .tr, // Replaced string
                                 onPressed: () {
                                   cubit.onSignupPressed();
                                 },
@@ -132,8 +160,11 @@ class SignupPage extends StatelessWidget {
                           ),
                           SizedBox(height: 25),
                           MyFooter(
-                            title: 'Already Have An Account?',
-                            action: 'Login',
+                            title:
+                                TranslationKeys
+                                    .alreadyHaveAnAccount
+                                    .tr, // Replaced string
+                            action: TranslationKeys.login.tr, // Replaced string
                             onPressed: () {
                               GetHelper.pushReplace(() => LoginPage());
                             },

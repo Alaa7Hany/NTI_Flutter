@@ -2,9 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../auth/data/repo/user_repo.dart';
 import '../../data/models/task_model.dart';
 
-import '../../data/models/user_model.dart';
+import '../../../auth/data/models/user_model.dart';
 import 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
@@ -12,9 +13,11 @@ class UserCubit extends Cubit<UserState> {
   static UserCubit get(context) => BlocProvider.of(context);
   UserModel? userModel;
 
-  void getUser(UserModel userModel) {
-    this.userModel = userModel;
-    emit(UserDataSuccessState());
+  void getUser() {
+    UserRepo userRepo = UserRepo();
+
+    userModel = userRepo.userModel;
+    emit(UserDataSuccessState(userModel: userRepo.userModel));
   }
 
   void updateUserName(String name) {

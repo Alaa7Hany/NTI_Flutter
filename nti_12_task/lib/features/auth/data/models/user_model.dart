@@ -1,5 +1,5 @@
 import 'package:image_picker/image_picker.dart';
-import 'task_model.dart';
+import '../../../home/data/models/task_model.dart';
 
 class UserModel {
   String? name;

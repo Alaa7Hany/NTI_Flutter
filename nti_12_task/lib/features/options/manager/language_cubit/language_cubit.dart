@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nti_12_task/features/options/manager/language_cubit/language_state.dart';
+import 'language_state.dart';
 
 import '../../../../core/translation/translation_helper.dart';
 

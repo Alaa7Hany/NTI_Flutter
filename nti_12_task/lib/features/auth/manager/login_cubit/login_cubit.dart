@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../home/data/models/user_model.dart';
+import '../../data/repo/user_repo.dart';
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -23,17 +23,16 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginLoadingState());
     Future.delayed(const Duration(seconds: 2), () {
       if (!formKey.currentState!.validate()) {
-        emit(LoginErrorState());
+        emit(LoginErrorState(errorMessage: 'Please enter valid data'));
         return;
       }
-      emit(
-        LoginSuccessState(
-          userModel: UserModel(
-            name: usernameController.text,
-            password: passwordController.text,
-          ),
-        ),
-      );
+      UserRepo userRepo = UserRepo();
+      if (userRepo.userModel.name != usernameController.text ||
+          userRepo.userModel.password != passwordController.text) {
+        emit(LoginErrorState(errorMessage: 'Invalid username or password'));
+        return;
+      }
+      emit(LoginSuccessState(userModel: userRepo.userModel));
     });
   }
 }

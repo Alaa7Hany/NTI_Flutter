@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:nti_12_task/features/auth/views/login_page.dart';
-import 'package:nti_12_task/features/options/views/language_page.dart';
 import 'core/cache/cache_data.dart';
 import 'core/translation/translation_helper.dart';
 import 'features/onboarding/views/splash_page.dart';
@@ -18,6 +16,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   await TranslationHelper.setLanguage();
+  // CacheHelper.removeData(key: CacheKeys.firstTime);
+  // CacheHelper.removeData(key: CacheKeys.loggedIn);
   runApp(const MyApp());
 }
 

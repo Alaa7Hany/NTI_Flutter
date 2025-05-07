@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:nti_12_task/core/translation/translation_keys.dart';
-import 'package:nti_12_task/features/options/manager/language_cubit/language_cubit.dart';
-import 'package:nti_12_task/features/options/manager/language_cubit/language_state.dart';
+import '../../../core/translation/translation_keys.dart';
+import '../manager/language_cubit/language_cubit.dart';
+import '../manager/language_cubit/language_state.dart';
 
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/simple_appbar.dart';

@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart'; // Add this import for `.tr`
 
 import '../../features/home/manager/user_cubit/user_cubit.dart';
 import '../../features/home/manager/user_cubit/user_state.dart';
+import '../translation/translation_keys.dart';
 import '../utils/app_assets.dart';
 import '../utils/app_colors.dart';
 
@@ -17,6 +19,9 @@ abstract class HomeAppBar {
       title: BlocBuilder<UserCubit, UserState>(
         builder: (context, state) {
           var cubit = UserCubit.get(context);
+          if (state is UserInitialState) {
+            cubit.getUser();
+          }
           return Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
             child: InkWell(
@@ -31,7 +36,7 @@ abstract class HomeAppBar {
                           cubit.userModel?.image != null
                               ? Image.file(File(cubit.userModel!.image!.path))
                               : Image.asset(
-                                AppAssets.profileImage,
+                                AppAssets.logo,
                                 fit: BoxFit.cover,
                                 width: 60,
                                 height: 60,
@@ -43,7 +48,7 @@ abstract class HomeAppBar {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Hello!',
+                        TranslationKeys.hello.tr, // Replaced string
                         style: TextStyle(
                           fontWeight: FontWeight.w300,
                           color: AppColors.black,
@@ -52,8 +57,8 @@ abstract class HomeAppBar {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        UserCubit.get(context).userModel?.name ?? 'Adventurer',
-
+                        cubit.userModel?.name ??
+                            TranslationKeys.adventurer.tr, // Replaced string
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w300,
@@ -68,7 +73,6 @@ abstract class HomeAppBar {
           );
         },
       ),
-
       backgroundColor: Colors.transparent,
     );
   }
