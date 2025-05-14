@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:nti_14_task/features/auth/data/repo/user_repo.dart';
+import 'package:nti_14_task/features/home/data/repo/tasks_repo.dart';
 import '../manager/get_tasks/get_tasks_cubit.dart';
 import '../manager/get_tasks/get_tasks_state.dart';
 import '../../../core/helper/get_helper.dart';
@@ -28,6 +31,10 @@ class HomePage extends StatelessWidget {
 
   ///////////////____Functions___/////////////////
   void _onAppBartapped(BuildContext context) {
+    for (var element in TasksRepo().tasks) {
+      log('element: ${element.title}');
+      log('element: ${element.id}');
+    }
     GetHelper.push(() => const OptionsPage());
   }
 
@@ -35,8 +42,8 @@ class HomePage extends StatelessWidget {
     GetHelper.push(() => const TodayTasksPage());
   }
 
-  void _onTaskTapped(BuildContext context) {
-    GetHelper.push(() => EditTaskPage());
+  void _onTaskTapped(BuildContext context, int id) {
+    GetHelper.push(() => EditTaskPage(id: id));
   }
 
   void _onGroupTapped(BuildContext context) {
@@ -61,14 +68,15 @@ class HomePage extends StatelessWidget {
             GetTasksCubit.get(context).getTasks();
             return BlocConsumer<GetTasksCubit, GetTasksState>(
               listener: (context, state) {
-                // if (state is GetTasksSuccess) {
-                //   log('Tasks loaded successfully: ${state.tasks.length}');
-                // }
+                if (state is GetTasksSuccess) {
+                  // log('Tasks loaded successfully: ${state.tasks.length}');
+                }
               },
               builder: (context, state) {
                 // final bool isEmpty =
                 //     UserCubit.get(context).userModel?.tasks?.isEmpty ?? true;
-
+                // GetTasksCubit.get(context).getTasks();
+                // log('message');
                 return Scaffold(
                   floatingActionButton: MyFloatingButton(
                     assetName: AppAssets.paperPlus,
@@ -147,7 +155,7 @@ class HomePage extends StatelessWidget {
                   itemBuilder: (_, index) {
                     return InProgressTaskCard(
                       taskModel: inProgressTasks[index],
-                      onTapped: () => _onTaskTapped(context),
+                      onTapped: (int id) => _onTaskTapped(context, id),
                     );
                   },
                 ),

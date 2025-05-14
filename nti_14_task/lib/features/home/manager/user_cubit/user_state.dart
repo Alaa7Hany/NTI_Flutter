@@ -29,3 +29,5 @@ class UpdateUserImageState extends UserState {}
 class UserAddTaskState extends UserState {}
 
 class UserEditTaskState extends UserState {}
+
+class RefreshTokenState extends UserState {}

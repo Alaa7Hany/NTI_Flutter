@@ -8,7 +8,7 @@ abstract class EndPoints {
   static const String refreshToken = 'refresh_token';
   static const String updateProfile = 'update_profile';
   static const String newTask = 'new_task';
-  static const String updateTask = 'tasks/1';
-  static const String deleteTask = 'tasks/2';
+  static const String updateTask = 'tasks/';
+  static const String deleteTask = 'tasks/';
   static const String getTasks = 'my_tasks';
 }

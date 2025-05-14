@@ -17,8 +17,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   await TranslationHelper.setLanguage();
-  // CacheHelper.removeData(key: CacheKeys.firstTime);
-  // CacheHelper.removeData(key: CacheKeys.loggedIn);
+  CacheHelper.removeData(key: CacheKeys.firstTime);
+  CacheHelper.removeData(key: CacheKeys.loggedIn);
   runApp(const MyApp());
 }
 

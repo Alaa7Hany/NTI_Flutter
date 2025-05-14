@@ -33,6 +33,7 @@ class _SplashPageState extends State<SplashPage> {
         GetHelper.pushReplace(() => const OnBoardingPage());
       } else if (CacheData.accessToken != null) {
         UserCubit.get(context).getUserFromCache();
+        // UserCubit.get(context).refreshToken();
 
         GetHelper.pushReplace(() => const HomePage());
       }

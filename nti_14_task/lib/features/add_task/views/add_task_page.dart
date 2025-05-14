@@ -121,6 +121,13 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         listener: (context, state) {
                           if (state is AddTaskSuccess) {
                             GetHelper.pushReplaceAll(() => HomePage());
+                          } else if (state is AddTaskError) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(state.errorMessage),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
                           }
                         },
                         builder: (context, state) {
@@ -128,7 +135,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                             text: TranslationKeys.addTask.tr,
                             isLoading: state is AddTaskLoading,
                             onPressed: () {
-                              cubit.addTaskToRepo();
+                              cubit.addTaskApi();
                             },
                           );
                         },

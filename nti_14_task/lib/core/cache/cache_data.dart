@@ -6,4 +6,5 @@ abstract class CacheData {
   static bool? loggedIn;
   static String? lang;
   static String? accessToken;
+  static String? refreshToken;
 }

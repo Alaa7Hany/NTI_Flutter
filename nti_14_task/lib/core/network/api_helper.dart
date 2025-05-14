@@ -14,7 +14,7 @@ class ApiHelper {
   Dio dio = Dio(
     BaseOptions(
       baseUrl: EndPoints.baseUrl,
-      connectTimeout: Duration(seconds: 10),
+      connectTimeout: Duration(seconds: 15),
       receiveTimeout: Duration(seconds: 10),
     ),
   );
@@ -25,6 +25,7 @@ class ApiHelper {
     Map<String, dynamic>? data,
     bool isFormData = true,
     bool isProtected = false,
+    bool isRefresh = false,
   }) async {
     return await dio.post(
       endPoint,
@@ -32,6 +33,7 @@ class ApiHelper {
       options: Options(
         headers: {
           if (isProtected) 'Authorization': 'Bearer ${CacheData.accessToken}',
+          if (isRefresh) 'refresh-token': 'Bearer ${CacheData.refreshToken}',
         },
       ),
     );
@@ -61,6 +63,23 @@ class ApiHelper {
     bool isProtected = false,
   }) async {
     return await dio.put(
+      endPoint,
+      data: isFormData ? FormData.fromMap(data ?? {}) : data,
+      options: Options(
+        headers: {
+          if (isProtected) 'Authorization': 'Bearer ${CacheData.accessToken}',
+        },
+      ),
+    );
+  }
+
+  Future<Response> deleteRequest({
+    required String endPoint,
+    Map<String, dynamic>? data,
+    bool isFormData = true,
+    bool isProtected = false,
+  }) async {
+    return await dio.delete(
       endPoint,
       data: isFormData ? FormData.fromMap(data ?? {}) : data,
       options: Options(

@@ -76,6 +76,10 @@ class UserRepo {
           key: CacheKeys.refreshToken,
           value: loginResponseModel.refreshToken,
         );
+        await CacheHelper.saveData(
+          key: CacheKeys.refreshToken,
+          value: loginResponseModel.refreshToken,
+        );
         // return user model
         if (loginResponseModel.user != null) {
           return Right(loginResponseModel.user!);
@@ -182,6 +186,31 @@ class UserRepo {
         log(newPassword);
         log(confirmPassword);
         print("Error ${e.toString()}");
+        if (e.response != null && e.response?.data['message'] != null) {
+          return Left(e.response?.data['message']);
+        }
+      }
+      print("Error ${e.toString()}");
+
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, String>> refreshToken() async {
+    try {
+      Response response = await apiHelper.postRequest(
+        endPoint: EndPoints.refreshToken,
+
+        isRefresh: true,
+      );
+
+      if (response.statusCode == 200) {
+        return Right('Refresh Success');
+      } else {
+        throw Exception("Refresh Failed\nTry Again later");
+      }
+    } catch (e) {
+      if (e is DioException) {
         if (e.response != null && e.response?.data['message'] != null) {
           return Left(e.response?.data['message']);
         }
