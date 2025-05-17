@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:nti_15_task/core/helper/get_helper.dart';
+import 'package:nti_15_task/features/home/manager/user_cubit/user_cubit.dart';
 import 'package:nti_15_task/features/options/manager/update_password_cubit.dart/update_password_cubit.dart';
 import '../../../core/translation/translation_keys.dart';
 import '../../../core/utils/app_assets.dart';
@@ -28,7 +29,12 @@ class UpdatePasswordPage extends StatelessWidget {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  MainImage(image: Image.asset(AppAssets.logo)),
+                  MainImage(
+                    image: Image.network(
+                      UserCubit.get(context).userModel?.imagePath ??
+                          AppAssets.logo,
+                    ),
+                  ),
                   BlocConsumer<UpdatePasswordCubit, UpdatePasswordState>(
                     listener: (context, state) {
                       if (state is UpdatePasswordSuccess) {

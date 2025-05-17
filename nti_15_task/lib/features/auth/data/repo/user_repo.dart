@@ -20,10 +20,6 @@ class UserRepo {
     return _instance;
   }
 
-  final UserModel _userModel = UserModel();
-
-  UserModel get userModel => _userModel;
-
   ApiHelper apiHelper = ApiHelper();
 
   Future<Either<String, void>> register(
@@ -71,10 +67,7 @@ class UserRepo {
           key: CacheKeys.refreshToken,
           value: loginResponseModel.refreshToken,
         );
-        await CacheHelper.saveData(
-          key: CacheKeys.refreshToken,
-          value: loginResponseModel.refreshToken,
-        );
+
         // return user model
         if (loginResponseModel.user != null) {
           return Right(loginResponseModel.user!);
@@ -120,13 +113,11 @@ class UserRepo {
         },
         isProtected: true,
       );
-      DefaultResponseModel responseModel = DefaultResponseModel.fromJson(
-        response.data,
-      );
-      if (responseModel.status != null && responseModel.status == true) {
-        return Right(responseModel.message ?? 'Success');
+      ApiResponse responseModel = ApiResponse.fromResponse(response);
+      if (responseModel.status) {
+        return Right(responseModel.message);
       } else {
-        throw Exception("Update Failed\nTry Again later");
+        throw Exception(responseModel.message);
       }
     } catch (e) {
       ApiResponse response = ApiResponse.fromError(e);
@@ -149,13 +140,11 @@ class UserRepo {
         },
         isProtected: true,
       );
-      DefaultResponseModel responseModel = DefaultResponseModel.fromJson(
-        response.data,
-      );
-      if (responseModel.status != null && responseModel.status == true) {
-        return Right(responseModel.message ?? 'Success');
+
+      if (response.status) {
+        return Right(response.message);
       } else {
-        throw Exception("Update Failed\nTry Again later");
+        throw Exception(response.message);
       }
     } catch (e) {
       ApiResponse response = ApiResponse.fromError(e);

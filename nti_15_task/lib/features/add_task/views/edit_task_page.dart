@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart'; // Add this import for `.tr`
+import 'package:nti_15_task/features/home/manager/user_cubit/user_cubit.dart';
 import '../../../core/helper/get_helper.dart';
 import '../manager/edit_task_cubit/edit_task_cubit.dart';
 import '../../home/views/home_page.dart';
@@ -75,7 +76,14 @@ class EditTaskPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             SizedBox(height: 10),
-                            EditTaskHeader(),
+                            EditTaskHeader(
+                              image:
+                                  cubit.imagePath != null
+                                      ? cubit.imagePath
+                                      : UserCubit.get(
+                                        context,
+                                      ).userModel!.imagePath,
+                            ),
                             SizedBox(height: 20),
                             Form(
                               key: cubit.formKey,

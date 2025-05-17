@@ -13,26 +13,26 @@ class UserCubit extends Cubit<UserState> {
   static UserCubit get(context) => BlocProvider.of(context);
   UserModel? userModel;
 
-  void refreshToken() async {
-    // var result = await UserRepo().refreshToken();
-    // result.fold(
-    //   (error) {
-    //     emit(UserErrorState(errorMes: error));
-    //     log('refresh token error: $error');
-    //   },
-    //   (message) {
-    //     log('refresh token success: $message');
-    //     emit(RefreshTokenState());
-    //   },
-    // );
-    // emit(RefreshTokenState());
-  }
+  // void refreshToken() async {
+  //   // var result = await UserRepo().refreshToken();
+  //   // result.fold(
+  //   //   (error) {
+  //   //     emit(UserErrorState(errorMes: error));
+  //   //     log('refresh token error: $error');
+  //   //   },
+  //   //   (message) {
+  //   //     log('refresh token success: $message');
+  //   //     emit(RefreshTokenState());
+  //   //   },
+  //   // );
+  //   // emit(RefreshTokenState());
+  // }
 
   void getUser(UserModel user) {
     emit(UserDataSuccessState(userModel: user));
   }
 
-  Future<bool> getUserFromCache() async {
+  Future<bool> getUserFromApi() async {
     var result = await UserRepo().getUserData();
     return result.fold(
       (error) {
@@ -42,6 +42,7 @@ class UserCubit extends Cubit<UserState> {
       },
       (userModel) {
         emit(UserDataSuccessState(userModel: userModel));
+        this.userModel = userModel;
         // in case of success return true
         return true;
       },
@@ -49,6 +50,7 @@ class UserCubit extends Cubit<UserState> {
   }
 
   void updateUserName(String name, XFile? image) async {
+    emit(UserLoadingState());
     var result = await UserRepo().updateProfile(name, image);
     result.fold(
       (error) {
@@ -58,7 +60,7 @@ class UserCubit extends Cubit<UserState> {
       (message) {
         // log('User success: ${userModel.imagePath ?? ''}');
         // getUserFromCache();
-        getUserFromCache();
+        getUserFromApi();
         emit(UserUpdateSuccessState(message: message));
       },
     );
@@ -73,14 +75,14 @@ class UserCubit extends Cubit<UserState> {
   //   emit(UserUpdateSuccessState(message: 'Password updated successfully'));
   // }
 
-  void updateUserImage(XFile image) {
-    if (userModel == null) {
-      userModel = UserModel(imagePath: image.path);
-    } else {
-      userModel?.imagePath = image.path;
-    }
-    emit(UpdateUserImageState());
-  }
+  // void updateUserImage(XFile image) {
+  //   if (userModel == null) {
+  //     userModel = UserModel(imagePath: image.path);
+  //   } else {
+  //     userModel?.imagePath = image.path;
+  //   }
+  //   emit(UpdateUserImageState());
+  // }
 
   void addTask(TaskModelApi task) {
     // if (userModel == null) {

@@ -33,12 +33,14 @@ class TasksRepo {
         endPoint: EndPoints.getTasks,
         isProtected: true,
       );
-      MyLogger.bgBlue('GetTasks from Repo 2');
+      // MyLogger.bgBlue('GetTasks from Repo 2');
       GetTasksResponseModel responseModel = GetTasksResponseModel.fromJson(
         response.data,
       );
 
-      if (responseModel.status != null && responseModel.status == true) {
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
+
+      if (apiResponse.status) {
         tasks.clear();
         for (TaskModelApi task in responseModel.tasks ?? []) {
           tasks.add(
@@ -93,12 +95,10 @@ class TasksRepo {
         endPoint: '${EndPoints.deleteTask}$id',
         isProtected: true,
       );
-      DefaultResponseModel responseModel = DefaultResponseModel.fromJson(
-        response.data,
-      );
+      ApiResponse responseModel = ApiResponse.fromResponse(response);
 
-      if (responseModel.status != null && responseModel.status == true) {
-        return Right(responseModel.message ?? "Task deleted successfully");
+      if (responseModel.status == true) {
+        return Right(responseModel.message);
       } else {
         throw Exception("Something went wrong");
       }
@@ -119,12 +119,10 @@ class TasksRepo {
         isProtected: true,
         data: {'title': title, 'description': description},
       );
-      DefaultResponseModel responseModel = DefaultResponseModel.fromJson(
-        response.data,
-      );
+      ApiResponse responseModel = ApiResponse.fromResponse(response);
 
-      if (responseModel.status != null && responseModel.status == true) {
-        return Right(responseModel.message ?? "Task updated successfully");
+      if (responseModel.status == true) {
+        return Right(responseModel.message);
       } else {
         throw Exception("Something went wrong");
       }

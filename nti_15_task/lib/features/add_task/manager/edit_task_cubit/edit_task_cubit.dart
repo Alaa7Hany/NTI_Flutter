@@ -16,11 +16,13 @@ class EditTaskCubit extends Cubit<EditTaskState> {
   final TextEditingController groupController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
   GroupModel? group;
+  String? imagePath;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   void displayTask(int id) {
     var task = TasksRepo().tasks.firstWhere((element) => element.id == id);
+    imagePath = task.imagePath;
     log('task: ${task.title}');
     titleController.text = task.title;
     descriptionController.text = task.description;

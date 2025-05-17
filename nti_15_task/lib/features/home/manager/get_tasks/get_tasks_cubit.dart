@@ -22,4 +22,10 @@ class GetTasksCubit extends Cubit<GetTasksState> {
     );
     emit(GetTasksSuccess(tasks: tasksRepo.tasks));
   }
+
+  void stopLoading() {
+    Future.delayed(const Duration(seconds: 1), () {
+      emit(GetTasksStopLoading());
+    });
+  }
 }

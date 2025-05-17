@@ -87,7 +87,13 @@ class HomePage extends StatelessWidget {
                   body:
                       (state is GetTasksSuccess && state.tasks.isNotEmpty)
                           ? _normalBody(context, state)
-                          : _emptyBody(),
+                          : (state is GetTasksStopLoading
+                              ? _emptyBody()
+                              : Center(
+                                child: const CircularProgressIndicator(
+                                  color: AppColors.primaryColor,
+                                ),
+                              )),
                 );
               },
             );

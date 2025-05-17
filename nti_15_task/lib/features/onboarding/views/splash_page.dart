@@ -36,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
         // check if the user is logged in using access token
         if (CacheData.accessToken != null) {
           // call the api to get user data
-          UserCubit.get(context).getUserFromCache().then((bool result) {
+          UserCubit.get(context).getUserFromApi().then((bool result) {
             if (result) {
               // if succeeded to fetch user data then go home
               GetHelper.pushReplace(() => HomePage());

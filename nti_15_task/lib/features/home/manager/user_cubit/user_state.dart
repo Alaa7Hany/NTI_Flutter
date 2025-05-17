@@ -4,6 +4,8 @@ abstract class UserState {}
 
 class UserInitialState extends UserState {}
 
+class UserLoadingState extends UserState {}
+
 class UserDataSuccessState extends UserState {
   final UserModel userModel;
 

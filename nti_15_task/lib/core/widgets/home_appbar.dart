@@ -31,7 +31,9 @@ abstract class HomeAppBar {
                     backgroundColor: AppColors.scaffoldBackground,
                     child: ClipOval(
                       child:
-                          state is UserDataSuccessState &&
+                          state is UserLoadingState
+                              ? null
+                              : state is UserDataSuccessState &&
                                   state.userModel.imagePath != null
                               ? Image.network(state.userModel.imagePath!)
                               : Image.asset(
@@ -56,7 +58,9 @@ abstract class HomeAppBar {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        state is UserDataSuccessState &&
+                        state is UserLoadingState
+                            ? ''
+                            : state is UserDataSuccessState &&
                                 state.userModel.imagePath != null
                             ? state.userModel.username!
                             : TranslationKeys.adventurer.tr, // Replaced string
